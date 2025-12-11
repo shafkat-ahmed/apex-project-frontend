@@ -9,13 +9,7 @@ export const getMenuData = (role) => [
     id: 1,
     name: "Dashboard",
     route: "/",
-    access: [ROLE_SUPER_ADMIN, ROLE_USER],
-  },
-  {
-    id: 2,
-    name: "User",
-    route: "/user/register",
-    access: [ROLE_SUPER_ADMIN],
+    access: [ROLE_SUPER_ADMIN, ROLE_MANAGER, ROLE_USER],
   },
   {
     id: 3,

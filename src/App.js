@@ -1,6 +1,7 @@
 import { Provider, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import Loader from "./components/common/Loader";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
@@ -28,6 +29,7 @@ function About() {
 function App() {
   return (
     <Provider store={store}>
+      <Loader />
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />

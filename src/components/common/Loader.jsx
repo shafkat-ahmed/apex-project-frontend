@@ -1,14 +1,13 @@
-import React, { Fragment } from "react";
+import { useSelector } from "react-redux";
 
 const Loader = () => {
+  const { isLoading } = useSelector((state) => state.loader);
+
+  if (!isLoading) return null;
   return (
-    <Fragment>
-      <div className={`loader-wrapper`} style={{ backgroundColor: "white" }}>
-        <div className="loader bg-transparent">
-          <div className="whirly-loader"> </div>
-        </div>
-      </div>
-    </Fragment>
+    <div className="loader-container">
+      <div className="loader"></div>
+    </div>
   );
 };
 

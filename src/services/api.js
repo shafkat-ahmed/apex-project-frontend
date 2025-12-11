@@ -1,7 +1,7 @@
 import axios from "axios";
 import { logout } from "../store/actions/authAction";
+import { startLoading, stopLoading } from "../store/actions/loaderAction";
 import { getToDate } from "../utils/dateUtils";
-import { loadingManager } from "../utils/loadingManager";
 
 const dev = "http://localhost:8080";
 const prod = "http://localhost:8080";
@@ -31,12 +31,10 @@ const api = axios.create({
 // Request interceptor
 api.interceptors.request.use(
   (config) => {
-    // Start loading when request is made
-    loadingManager.start();
+    globalStore.dispatch(startLoading());
 
     console.log(config);
 
-    // Get token from Redux store instead of localStorage
     const token = localStorage.getItem("accessToken");
     if (
       token &&
@@ -48,8 +46,7 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
-    // Stop loading on request error
-    loadingManager.stop();
+    globalStore.dispatch(stopLoading());
     return Promise.reject(error);
   }
 );
@@ -57,21 +54,15 @@ api.interceptors.request.use(
 // Response interceptor
 api.interceptors.response.use(
   (response) => {
-    // Stop loading when response is received
-    loadingManager.stop();
+    globalStore.dispatch(stopLoading());
     return response;
   },
   (error) => {
-    // Stop loading on response error
-    loadingManager.stop();
-
-    // Handle common errors here
+    globalStore.dispatch(stopLoading());
     if (
       (error.response?.status === 401 || error.response?.status === 401) &&
       globalStore
     ) {
-      // Handle unauthorized access - logout user
-
       console.error("Unauthorized access");
       globalStore.dispatch(logout());
     }

@@ -147,6 +147,15 @@ const TaskList = () => {
       selector: (row) => row.description,
       wrap: true,
     },
+    ...(role === ROLE_MANAGER
+      ? [
+          {
+            name: "Assigned To",
+            selector: (row) => row.assignee?.name || "Unassigned",
+            wrap: true,
+          },
+        ]
+      : []),
     {
       name: "Priority",
       sortable: true,
@@ -207,7 +216,7 @@ const TaskList = () => {
                 onClick: () => updateStatus(row),
                 icon: "bi-arrow-right-circle",
               },
-              ...(role === ROLE_MANAGER
+              ...(role === ROLE_MANAGER && !row.assignee
                 ? [
                     {
                       label: "Assign User",
