@@ -69,7 +69,9 @@ const CustomTableServer = ({
     },
     headRow: {
       style: {
-        backgroundColor: "#dddddd",
+        backgroundColor: "#492b74",
+        color: "white",
+        fontWeight: "bold",
       },
     },
     rows: {
@@ -94,7 +96,7 @@ const CustomTableServer = ({
         "&:not(:last-of-type)": {
           borderRightStyle: "solid",
           borderRightWidth: "0.1px",
-          borderRightColor: "grey",
+          borderRightColor: "#dddd",
         },
         justifyContent: "center",
       },
@@ -130,7 +132,7 @@ const CustomTableServer = ({
 
   return (
     <DataTable
-      className="brand-list-table"
+      className="brand-list-table rounded-3 shadow-lg"
       columns={[
         {
           name: "Sl",

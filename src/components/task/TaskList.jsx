@@ -8,6 +8,7 @@ import {
   getTasksPaginated,
   updateStatusToNext,
 } from "../../services/api";
+import { ROLE_MANAGER } from "../../utils/constants/Roles";
 import {
   TaskPriority,
   TaskPriorityOptions,
@@ -149,14 +150,26 @@ const TaskList = () => {
     {
       name: "Priority",
       sortable: true,
-      selector: (row) => row.priority,
+      cell: (row) => {
+        const val = row.priority || "";
+        const cls = `tm-badge priority-${val.toString().toLowerCase()}`;
+        return <span className={cls}>{val}</span>;
+      },
       wrap: true,
       width: "150px",
     },
     {
       name: "Status",
       sortable: true,
-      selector: (row) => row.status,
+      cell: (row) => {
+        const key = row.status || "";
+        const text = TaskStatus[key] || key;
+        const cls = `tm-badge status-${key
+          .toString()
+          .toLowerCase()
+          .replace(/_/g, "-")}`;
+        return <span className={cls}>{text}</span>;
+      },
       wrap: true,
       width: "150px",
     },
@@ -185,22 +198,30 @@ const TaskList = () => {
       name: "Action",
       cell: (row) => (
         <ActionsColumn
-          onEditClick={() => navigate(`/task/edit/${row.id}`)}
-          onDeleteClick={() => deleteTask(row.id)}
-          refetch={fetchTaskList}
-          moreOptions={[
-            {
-              label: "Update Status",
-              onClick: () => updateStatus(row),
-            },
-            {
-              label: "Assign User",
-              onClick: () => {
-                setSelectedRow(row);
-                modalRef.current?.open();
+          {...(TaskStatus[row.status] !== TaskStatus.COMPLETED && {
+            onEditClick: () => navigate(`/task/edit/${row.id}`),
+            onDeleteClick: () => deleteTask(row.id),
+            moreOptions: [
+              {
+                label: "Update Status",
+                onClick: () => updateStatus(row),
+                icon: "bi-arrow-right-circle",
               },
-            },
-          ]}
+              ...(role === ROLE_MANAGER
+                ? [
+                    {
+                      label: "Assign User",
+                      onClick: () => {
+                        setSelectedRow(row);
+                        modalRef.current?.open();
+                      },
+                      icon: "bi-person-plus",
+                    },
+                  ]
+                : []),
+            ],
+          })}
+          refetch={fetchTaskList}
         />
       ),
       wrap: true,

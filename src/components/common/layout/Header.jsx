@@ -49,8 +49,8 @@ const Header = () => {
               <a className="navbar_brand float-start dn-smd">
                 <img
                   className="logo1 img-fluid"
-                  src="https://e7.pngegg.com/pngimages/215/344/png-clipart-computer-icons-task-management-action-item-compliance-icon-angle-text-thumbnail.png"
-                  style={{ width: "50px", height: "50px" }}
+                  src="https://cdn-icons-png.flaticon.com/512/11743/11743656.png"
+                  style={{ width: "50px", height: "65px" }}
                   alt="header-logo.png"
                 />
               </a>

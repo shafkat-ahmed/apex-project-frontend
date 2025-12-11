@@ -23,6 +23,7 @@ export default function ActionsColumn({
           {
             label: "Edit",
             onClick: onEditClick,
+            icon: "bi-pencil",
           },
         ]
       : []),
@@ -31,6 +32,7 @@ export default function ActionsColumn({
           {
             label: "View",
             onClick: onViewClick,
+            icon: "bi-eye",
           },
         ]
       : []),
@@ -39,6 +41,7 @@ export default function ActionsColumn({
           {
             label: "Delete",
             onClick: handleDelete,
+            icon: "bi-trash",
           },
         ]
       : []),

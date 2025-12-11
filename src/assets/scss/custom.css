@@ -118,6 +118,43 @@ ul.manage-account-logout {
   border-left: 1px solid #ddd;
   border-right: 1px solid #ddd;
 }
+
+/* Badges for task list */
+.tm-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  min-width: 72px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  text-transform: capitalize;
+}
+/* Priority */
+.tm-badge.priority-low {
+  background: #198754;
+}
+.tm-badge.priority-medium {
+  background: #ffc107;
+  color: #111;
+}
+.tm-badge.priority-high {
+  background: #dc3545;
+}
+/* Status */
+.tm-badge.status-new {
+  background: var(--color-primary, #0d6efd);
+}
+.tm-badge.status-in-progress {
+  background: #0d6efd;
+}
+.tm-badge.status-completed {
+  background: #198754;
+}
+
 .filter-component .input-group {
   display: flex;
   align-items: center;

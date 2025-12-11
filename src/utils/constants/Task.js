@@ -1,7 +1,7 @@
 export const TaskStatus = {
-  NEW: "NEW",
-  IN_PROGRESS: "IN_PROGRESS",
-  COMPLETED: "COMPLETED",
+  NEW: "New",
+  IN_PROGRESS: "In Progress",
+  COMPLETED: "Completed",
 };
 
 export const TaskStatusOptions = Object.entries(TaskStatus).map(

@@ -133,14 +133,26 @@ const AssignedTaskList = () => {
     {
       name: "Priority",
       sortable: true,
-      selector: (row) => row.priority,
+      cell: (row) => {
+        const val = row.priority || "";
+        const cls = `tm-badge priority-${val.toString().toLowerCase()}`;
+        return <span className={cls}>{val}</span>;
+      },
       wrap: true,
       width: "150px",
     },
     {
       name: "Status",
       sortable: true,
-      selector: (row) => row.status,
+      cell: (row) => {
+        const key = row.status || "";
+        const text = TaskStatus[key] || key;
+        const cls = `tm-badge status-${key
+          .toString()
+          .toLowerCase()
+          .replace(/_/g, "-")}`;
+        return <span className={cls}>{text}</span>;
+      },
       wrap: true,
       width: "150px",
     },
@@ -170,12 +182,15 @@ const AssignedTaskList = () => {
       cell: (row) => (
         <ActionsColumn
           refetch={fetchTaskList}
-          moreOptions={[
-            {
-              label: "Update Status",
-              onClick: () => updateStatus(row),
-            },
-          ]}
+          {...(TaskStatus[row.status] !== TaskStatus.COMPLETED && {
+            moreOptions: [
+              {
+                label: "Update Status",
+                onClick: () => updateStatus(row),
+                icon: "bi-arrow-right-circle",
+              },
+            ],
+          })}
         />
       ),
       wrap: true,
@@ -189,16 +204,6 @@ const AssignedTaskList = () => {
 
   return (
     <div className="container-fluid">
-      <div className="col-lg-6 ms-auto mb-2">
-        <div className="my_profile_setting_input">
-          <button
-            className="create-btn-custom float-end"
-            onClick={() => navigate("/task/create")}
-          >
-            Create Task
-          </button>
-        </div>
-      </div>
       <div className="col-lg-12">
         <CustomTableServer
           onPageChange={(pageNumber) => setPageNumber(pageNumber)}
