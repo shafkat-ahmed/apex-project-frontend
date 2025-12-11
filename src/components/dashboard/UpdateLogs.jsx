@@ -40,7 +40,9 @@ const UpdateLogs = () => {
         <Card.Body>
           {/* <Card.Title className="mb-4">Recent Update Logs</Card.Title> */}
           <div className="d-flex justify-content-between align-items-center mb-3">
-            <h5 className="card-title text-primary">Recent Update Logs</h5>
+            <h5 className="card-title text-primary">
+              Recent Update Logs (Last 2 days)
+            </h5>
             <Dropdown>
               <Dropdown.Toggle
                 variant="outline-primary"

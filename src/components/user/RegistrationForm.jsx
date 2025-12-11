@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { registerUser } from "../../services/api";
 import { loginAction } from "../../store/actions/authAction";
@@ -97,6 +97,12 @@ const RegistrationForm = () => {
       <button type="submit" className="btn btn-log w-100 btn-thm">
         Register
       </button>
+
+      <div className="text-center mt-3">
+        <small className="text-muted">
+          Have an account? <Link to="/login">Sign In</Link>
+        </small>
+      </div>
     </form>
   );
 };

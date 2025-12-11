@@ -1,28 +1,13 @@
-import React from "react";
+import Layout from "../../common/layout/Layout";
 import RegistrationForm from "../../user/RegistrationForm";
 
 const Register = () => {
   return (
-    <>
-      <section className="d-flex justify-content-center align-items-center">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-sm-12 col-lg-6">
-              <div className="text-center mb-4">
-                {/* <img
-                  src="/assets/images/ALC_LOGO.png"
-                  alt="Logo"
-                  style={{ maxWidth: "250px", height: "auto" }}
-                /> */}
-              </div>
-              <div className="login_form inner_page">
-                <RegistrationForm />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+    <Layout>
+      <div className="login_form inner_page col-lg-6 m-auto p-5 rounded-3 shadow-lg">
+        <RegistrationForm />
+      </div>
+    </Layout>
   );
 };
 

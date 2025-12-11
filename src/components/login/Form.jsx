@@ -17,67 +17,76 @@ const Form = () => {
   const auth = useSelector((store) => store.auth);
 
   const onSubmit = async (data) => {
-    console.log("Form Data:", data);
     const { username, password } = data;
     const result = await dispatch(loginAction(username, password));
 
     if (result.success) {
-      console.log("Logged in! User:", auth.user);
-      navigate("/about");
+      navigate("/");
     } else {
-      console.log("Failed:", result.error);
       Swal.fire("Error", result.error?.message, "error");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="heading text-center">
-        <h3>Login to your account</h3>
-        <p className="text-center">
-          Don’t have an account?{" "}
-          <Link to="/user/register" className="text-thm">
-            Sign Up!
-          </Link>
-        </p>
-      </div>
-
-      {/* Email Input */}
-      <div className="my_profile_setting_input form-group">
-        <input
-          {...register("username", { required: "Email is required" })}
-          type="email"
-          className={`form-control ${errors.username ? "is-invalid" : ""}`}
-          placeholder="User Name or Email"
-        />
-        <div className="input-group-prepend">
-          <div className="input-group-text">
-            <i className="flaticon-user"></i>
+    <div className="tm-login-card">
+      <form onSubmit={handleSubmit(onSubmit)} className="tm-login-form">
+        <div className="form-group">
+          <label className="small text-secondary">Email</label>
+          <div className="input-with-icon">
+            <input
+              {...register("username", { required: "Email is required" })}
+              type="email"
+              className={`form-control ${errors.username ? "is-invalid" : ""}`}
+              placeholder="you@company.com"
+            />
           </div>
+          {errors.username && (
+            <div className="invalid-feedback d-block">
+              {errors.username.message}
+            </div>
+          )}
         </div>
-        {errors.username && (
-          <div className="invalid-feedback">{errors.username.message}</div>
-        )}
-      </div>
 
-      {/* Password Input */}
-      <div className="my_profile_setting_input form-group">
-        <input
-          {...register("password", { required: "Password is required" })}
-          type="password"
-          className={`form-control ${errors.password ? "is-invalid" : ""}`}
-          placeholder="Password"
-        />
-        {errors.password && (
-          <div className="invalid-feedback">{errors.password.message}</div>
-        )}
-      </div>
+        <div className="form-group">
+          <label className="small text-secondary">Password</label>
+          <div className="input-with-icon">
+            <input
+              {...register("password", { required: "Password is required" })}
+              type="password"
+              className={`form-control ${errors.password ? "is-invalid" : ""}`}
+              placeholder="Enter your password"
+            />
+          </div>
+          {errors.password && (
+            <div className="invalid-feedback d-block">
+              {errors.password.message}
+            </div>
+          )}
+        </div>
 
-      {/* Submit Button */}
-      <button type="submit" className="btn btn-log w-100 btn-thm">
-        Log In
-      </button>
-    </form>
+        <button type="submit" className="btn btn-primary btn-block">
+          Log In
+        </button>
+
+        <div className="text-center mt-3">
+          <small className="text-muted">
+            Don’t have an account? <Link to="/user/register">Sign Up</Link>
+          </small>
+        </div>
+      </form>
+
+      <style>{`
+        .tm-login-card {
+          background: #ffffff;
+          padding: 20px;
+          border-radius: 12px;
+          box-shadow: 0 8px 30px rgba(17,24,39,0.08);
+          min-width: 400px;
+          margin: 24px auto;
+        }
+        .btn-block { width: 100%; padding: 10px 12px; border-radius:8px }
+      `}</style>
+    </div>
   );
 };
 
