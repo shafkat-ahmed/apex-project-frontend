@@ -2,6 +2,7 @@ import { Provider, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import PrivateRoute from "./components/common/PrivateRoute";
+import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
 import AssignedList from "./components/pages/task/AssignedList";
 import Create from "./components/pages/task/Create";
@@ -9,21 +10,6 @@ import Edit from "./components/pages/task/Edit";
 import List from "./components/pages/task/List";
 import Register from "./components/pages/user/Register";
 import store from "./store/store";
-
-function Home() {
-  return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-md-12">
-          <h1 className="display-4">Welcome to Apex Project</h1>
-          <p className="lead">
-            This is the home page of your React application.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function About() {
   const { role } = useSelector((store) => store.auth);

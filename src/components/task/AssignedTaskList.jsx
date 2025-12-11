@@ -43,7 +43,11 @@ const AssignedTaskList = () => {
       setData(response.data);
     } catch (error) {
       console.error(error);
-      Swal.fire("Oops!", error?.message, "error");
+      Swal.fire(
+        "Oops!",
+        error?.response?.data?.message || "Fetch Failed",
+        "error"
+      );
     }
   };
 
@@ -108,6 +112,12 @@ const AssignedTaskList = () => {
   const onFilterChange = (filterText) => setKeyword(filterText);
 
   let columns = [
+    {
+      name: "Assigned By",
+      sortable: true,
+      selector: (row) => row.assignedBy?.name,
+      wrap: true,
+    },
     {
       name: "Title",
       sortable: true,

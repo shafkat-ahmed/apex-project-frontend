@@ -1,5 +1,6 @@
 import axios from "axios";
 import { logout } from "../store/actions/authAction";
+import { getToDate } from "../utils/dateUtils";
 import { loadingManager } from "../utils/loadingManager";
 
 const dev = "http://localhost:8080";
@@ -346,6 +347,33 @@ export async function assignTaskToUser(taskId, userId) {
 
   const response = await api.patch(
     `/api/manager/assign/user/to/task?${queryParams.toString()}`
+  );
+  return response;
+}
+
+/**
+ * Get recently updated tasks (sortable)
+ * @param {string} toDate - ISO datetime string (e.g. 2025-12-11T00:00:00)
+ * @param {string} sortType - Sort type string expected by backend
+ * @returns {Promise} - Axios response with list of TaskDto
+ */
+export async function getRecentlyUpdatedTasks(
+  toDate = getToDate(new Date()),
+  sortType = "desc"
+) {
+  if (!toDate) {
+    throw new Error("toDate is required");
+  }
+  if (!sortType) {
+    throw new Error("sortType is required");
+  }
+
+  const queryParams = new URLSearchParams();
+  queryParams.append("toDate", toDate);
+  queryParams.append("sortType", sortType);
+
+  const response = await api.get(
+    `/api/task/by/recent/update/sortable?${queryParams.toString()}`
   );
   return response;
 }
