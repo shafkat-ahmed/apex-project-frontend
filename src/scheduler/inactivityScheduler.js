@@ -29,6 +29,11 @@ export const startInactivityWatcher = (store) => {
 
     inactivityTimer = setTimeout(() => {
       console.log("15 minutes of inactivity — force logout");
+      Swal.fire(
+        "Logged Out",
+        "You have been logged out due to inactivity.",
+        "info"
+      );
       store.dispatch(logout());
     }, inactivityLimit);
   };

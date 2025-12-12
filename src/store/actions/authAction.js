@@ -2,7 +2,6 @@ import {
   startTokenRefreshScheduler,
   stopTokenRefreshScheduler,
 } from "../../scheduler/autoTokenScheduler";
-import { stopInactivityWatcher } from "../../scheduler/inactivityScheduler";
 import { login, refreshToken } from "../../services/api";
 import { navigateTo } from "../../services/navigationService";
 import { decodeJWT } from "../../utils/jwtDecoder";
@@ -58,7 +57,6 @@ export function refreshTokenAction() {
 
 export function logout() {
   stopTokenRefreshScheduler();
-  stopInactivityWatcher();
   navigateTo("/login");
   return { type: LOGOUT };
 }
