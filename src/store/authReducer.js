@@ -43,15 +43,21 @@ export default function authReducer(state = initialState, action) {
       };
 
     case LOGOUT:
-      // Clear localStorage
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("tokenType");
       localStorage.removeItem("expiresIn");
       localStorage.removeItem("user");
-
-      window.location.href = "/login";
-      return initialState;
+      localStorage.removeItem("role");
+      localStorage.removeItem("isAuthenticated");
+      return {
+        ...state,
+        accessToken: null,
+        refreshToken: null,
+        isAuthenticated: false,
+        user: null,
+        role: null,
+      };
 
     default:
       return state;

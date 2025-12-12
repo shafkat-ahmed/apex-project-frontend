@@ -57,8 +57,16 @@ const RegistrationForm = () => {
 
       <div className="my_profile_setting_input form-group">
         <input
-          {...register("phone", { required: "Mobile No is required" })}
-          type="text"
+          {...register("phone", {
+            required: "Mobile No is required",
+            pattern: {
+              value: /^\d+$/,
+              message: "Phone must contain numbers only",
+            },
+          })}
+          type="tel"
+          inputMode="numeric"
+          pattern="\d*"
           className={`form-control ${errors.phone ? "is-invalid" : ""}`}
           placeholder="Mobile"
         />
@@ -83,10 +91,16 @@ const RegistrationForm = () => {
       {/* Password Input */}
       <div className="my_profile_setting_input form-group">
         <input
-          {...register("password", { required: "Password is required" })}
+          {...register("password", {
+            required: "Password is required",
+            minLength: {
+              value: 6,
+              message: "Password must be at least 6 characters",
+            },
+          })}
           type="password"
           className={`form-control ${errors.password ? "is-invalid" : ""}`}
-          placeholder="Password"
+          placeholder="Password (Min 6 characters)"
         />
         {errors.password && (
           <div className="invalid-feedback">{errors.password.message}</div>

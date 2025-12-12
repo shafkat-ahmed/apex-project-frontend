@@ -13,16 +13,18 @@ export const startInactivityWatcher = (store) => {
     clearTimeout(inactivityWarningTimer);
 
     inactivityWarningTimer = setTimeout(() => {
-      Swal.fire({
-        title: "Inactivity Warning!",
-        text: "Stay Logged In?",
-        icon: "info",
-        confirmButtonText: "Ok",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          resetTimer();
-        }
-      });
+      if (localStorage.getItem("accessToken")) {
+        Swal.fire({
+          title: "Inactivity Warning!",
+          text: "Stay Logged In?",
+          icon: "info",
+          confirmButtonText: "Ok",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            resetTimer();
+          }
+        });
+      }
     }, inactivityWarning);
 
     inactivityTimer = setTimeout(() => {
@@ -38,4 +40,9 @@ export const startInactivityWatcher = (store) => {
   });
 
   resetTimer();
+};
+
+export const stopInactivityWatcher = () => {
+  inactivityTimer && clearTimeout(inactivityTimer);
+  inactivityWarningTimer && clearTimeout(inactivityWarningTimer);
 };

@@ -129,7 +129,8 @@ const TaskCreate = ({ id }) => {
         <div className="col-lg-12">
           <div className="my_profile_setting_input form-group">
             <label htmlFor="propertyTitle">Description</label>
-            <input
+            <textarea
+              rows={3}
               type="text"
               placeholder=""
               className={`form-control ${

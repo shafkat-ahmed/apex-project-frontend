@@ -2,7 +2,9 @@ import {
   startTokenRefreshScheduler,
   stopTokenRefreshScheduler,
 } from "../../scheduler/autoTokenScheduler";
+import { stopInactivityWatcher } from "../../scheduler/inactivityScheduler";
 import { login, refreshToken } from "../../services/api";
+import { navigateTo } from "../../services/navigationService";
 import { decodeJWT } from "../../utils/jwtDecoder";
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
@@ -56,11 +58,7 @@ export function refreshTokenAction() {
 
 export function logout() {
   stopTokenRefreshScheduler();
-  localStorage.removeItem("accessToken");
-  localStorage.removeItem("refreshToken");
-  localStorage.removeItem("tokenType");
-  localStorage.removeItem("expiresIn");
-  localStorage.removeItem("user");
-  window.location.href = "/login";
+  stopInactivityWatcher();
+  navigateTo("/login");
   return { type: LOGOUT };
 }
