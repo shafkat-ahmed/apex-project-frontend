@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Provider, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
@@ -10,6 +11,8 @@ import Create from "./components/pages/task/Create";
 import Edit from "./components/pages/task/Edit";
 import List from "./components/pages/task/List";
 import Register from "./components/pages/user/Register";
+import { navigateTo } from "./services/navigationService";
+import { logout } from "./store/actions/authAction";
 import store from "./store/store";
 
 function About() {
@@ -27,6 +30,19 @@ function About() {
 }
 
 function App() {
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === "accessToken" && !event.newValue) {
+        // user logged out in another tab
+        store.dispatch(logout());
+        navigateTo("/login");
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
   return (
     <Provider store={store}>
       <Loader />

@@ -43,6 +43,7 @@ export const startInactivityWatcher = (store) => {
 };
 
 export const stopInactivityWatcher = () => {
+  console.log("Stopping inactivity watcher");
   inactivityTimer && clearTimeout(inactivityTimer);
   inactivityWarningTimer && clearTimeout(inactivityWarningTimer);
 };
