@@ -2,6 +2,13 @@
 
 This project was bootstrapped with Create React App and is compatible with Node 16.10.0.
 
+## Folder Structure
+- src folder contains all the necessary utilities,pages,components
+- src/component/pages holds all routes
+- src/scheduler holds all the timer scheduler functions 
+- src/store holds reducers and actions
+- src/utils holds all utility functions, decoder and constants
+
 ## Available Scripts
 
 In the project directory, you can run:
