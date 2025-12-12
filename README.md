@@ -4,6 +4,7 @@ This project was bootstrapped with Create React App and is compatible with Node 
 
 ## Folder Structure
 - src folder contains all the necessary utilities,pages,components
+- src/services/api contains all axios api calls
 - src/component/pages holds all routes
 - src/scheduler holds all the timer scheduler functions 
 - src/store holds reducers and actions
